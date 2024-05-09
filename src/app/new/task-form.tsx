@@ -1,5 +1,10 @@
 import * as React from "react";
-import { BellRing } from "lucide-react";
+import {
+  BellRing,
+  CreditCardIcon,
+  DollarSignIcon,
+  WalletCardsIcon,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -20,6 +25,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
+import { RadioGroupItem, RadioGroup } from "@/components/ui/radio-group";
 
 export function TaskForm() {
   async function createTask(formData: FormData) {
@@ -27,8 +33,9 @@ export function TaskForm() {
     const name = formData.get("taskName");
     const framework = formData.get("framework");
     const switchValue = formData.get("switch");
+    const paymentMethod = formData.get("paymenthMethod");
 
-    console.log(name, framework, switchValue);
+    console.log({ switchValue, paymentMethod, name, framework });
   }
 
   return (
@@ -41,6 +48,50 @@ export function TaskForm() {
           </CardDescription>
         </CardHeader>
         <CardContent>
+          <RadioGroup
+            className="grid grid-cols-3 gap-4"
+            defaultValue="card"
+            name="paymenthMethod"
+          >
+            <div>
+              <RadioGroupItem className="peer sr-only" id="card" value="card" />
+              <Label
+                className="flex flex-col items-center justify-between rounded-md border-2 border-gray-100 bg-white p-4 hover:bg-gray-100 hover:text-gray-900 peer-data-[state=checked]:border-gray-900 [&:has([data-state=checked])]:border-gray-900 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:peer-data-[state=checked]:border-gray-50 dark:[&:has([data-state=checked])]:border-gray-50"
+                htmlFor="card"
+              >
+                <CreditCardIcon className="mb-3 h-6 w-6" />
+                Card
+              </Label>
+            </div>
+            <div>
+              <RadioGroupItem
+                className="peer sr-only"
+                id="paypal"
+                value="paypal"
+              />
+              <Label
+                className="flex flex-col items-center justify-between rounded-md border-2 border-gray-100 bg-white p-4 hover:bg-gray-100 hover:text-gray-900 peer-data-[state=checked]:border-gray-900 [&:has([data-state=checked])]:border-gray-900 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:peer-data-[state=checked]:border-gray-50 dark:[&:has([data-state=checked])]:border-gray-50"
+                htmlFor="paypal"
+              >
+                <WalletCardsIcon className="mb-3 h-6 w-6" />
+                Wallet
+              </Label>
+            </div>
+            <div>
+              <RadioGroupItem
+                className="peer sr-only"
+                id="apple"
+                value="apple"
+              />
+              <Label
+                className="flex flex-col items-center justify-between rounded-md border-2 border-gray-100 bg-white p-4 hover:bg-gray-100 hover:text-gray-900 peer-data-[state=checked]:border-gray-900 [&:has([data-state=checked])]:border-gray-900 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:peer-data-[state=checked]:border-gray-50 dark:[&:has([data-state=checked])]:border-gray-50"
+                htmlFor="apple"
+              >
+                <DollarSignIcon className="mb-3 h-6 w-6" />
+                Cash
+              </Label>
+            </div>
+          </RadioGroup>
           <div className=" flex items-center space-x-4 rounded-md border p-4">
             <BellRing />
             <div className="flex-1 space-y-1">
