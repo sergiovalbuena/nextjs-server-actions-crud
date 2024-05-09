@@ -6,7 +6,7 @@ import {
   WalletCardsIcon,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -26,11 +26,16 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { RadioGroupItem, RadioGroup } from "@/components/ui/radio-group";
-import { createTask } from "@/actions/tasks-actions";
+import { createTask, updateTask } from "@/actions/tasks-actions";
+import { Task } from "@prisma/client";
+import Link from "next/link";
 
-export function TaskForm() {
+export function TaskForm({ task }: { task: Task }) {
+  const functionAction = task?.id ? updateTask : createTask;
+
   return (
-    <form action={createTask}>
+    <form action={functionAction}>
+      <input type="hidden" name="id" value={task?.id} />
       <Card className="w-[350px]">
         <CardHeader>
           <CardTitle>Create project</CardTitle>
@@ -41,7 +46,7 @@ export function TaskForm() {
         <CardContent>
           <RadioGroup
             className="grid grid-cols-3 gap-4"
-            defaultValue="card"
+            defaultValue={task?.paymentMethod}
             name="paymenthMethod"
           >
             <div>
@@ -102,11 +107,12 @@ export function TaskForm() {
                 id="name"
                 name="taskName"
                 placeholder="Name of your project"
+                defaultValue={task?.name}
               />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="framework">Framework</Label>
-              <Select name="framework">
+              <Select name="framework" defaultValue={task?.framework}>
                 <SelectTrigger id="framework">
                   <SelectValue placeholder="Select" />
                 </SelectTrigger>
@@ -121,8 +127,12 @@ export function TaskForm() {
           </div>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button variant="outline">Cancel</Button>
-          <Button type="submit">Submit</Button>
+          <Link href="/" className={buttonVariants({ variant: "secondary" })}>
+            Cancel
+          </Link>
+          <Button type="submit">
+            {task?.id ? "Update" : "Create"} project
+          </Button>
         </CardFooter>
       </Card>
     </form>

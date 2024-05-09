@@ -1,11 +1,13 @@
-import Link from "next/link";
 import { ModeToggle } from "./ModeToggle";
 import { buttonVariants } from "./ui/button";
+import Link from "next/link";
 
 function Navbar() {
   return (
     <div className="flex justify-between">
-      Navbar
+      <Link href="/">
+        <h1>Navbar</h1>
+      </Link>
       <div className="flex gap-x-2 items-center ">
         <Link href="/new" className={buttonVariants({ variant: "secondary" })}>
           New Task

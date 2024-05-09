@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -11,6 +11,7 @@ import clsx from "clsx";
 import { PencilIcon, TrashIcon } from "lucide-react";
 import { Task } from "@prisma/client";
 import { TaskButtonDelete } from "./TaskButtonDelete";
+import Link from "next/link";
 
 export function TaskCard({ task }: { task: Task }) {
   return (
@@ -37,9 +38,12 @@ export function TaskCard({ task }: { task: Task }) {
           <TrashIcon />
         </Button> */}
         <TaskButtonDelete taskId={task.id} />
-        <Button variant="outline">
-          <PencilIcon />
-        </Button>
+        <Link
+          href={`/tasks/${task.id}/edit`}
+          className={buttonVariants({ variant: "secondary" })}
+        >
+          <PencilIcon className="text-black" />
+        </Link>
       </CardFooter>
     </Card>
   );
