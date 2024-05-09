@@ -11,10 +11,12 @@ datasource db {
 }
 
 model Task {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String?
-  priority    Int      @default(1)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            Int      @id @default(autoincrement())
+  name          String
+  framework     String
+  paymentMethod String
+  description   String?
+  priority      Int?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
