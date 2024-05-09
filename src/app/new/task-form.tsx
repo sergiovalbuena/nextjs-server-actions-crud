@@ -26,36 +26,9 @@ import {
 } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { RadioGroupItem, RadioGroup } from "@/components/ui/radio-group";
-import prisma from "@/lib/prisma";
-import { redirect } from "next/navigation";
+import { createTask } from "@/actions/tasks-actions";
 
 export function TaskForm() {
-  async function createTask(formData: FormData) {
-    "use server";
-    const name = formData.get("taskName")?.toString();
-    const framework = formData.get("framework")?.toString();
-    const switchValue = formData.get("switch");
-    const paymentMethod = formData.get("paymenthMethod")?.toString();
-
-    //console.log({ switchValue, paymentMethod, name, framework });
-
-    if (!name || !framework || !paymentMethod) {
-      return;
-    }
-
-    const newTask = await prisma.task.create({
-      data: {
-        name: name,
-        framework: framework,
-        //switchValue: switchValue,
-        paymentMethod: paymentMethod,
-      },
-    });
-
-    console.log(newTask);
-    redirect("/");
-  }
-
   return (
     <form action={createTask}>
       <Card className="w-[350px]">

@@ -10,6 +10,7 @@ import {
 import clsx from "clsx";
 import { PencilIcon, TrashIcon } from "lucide-react";
 import { Task } from "@prisma/client";
+import { TaskButtonDelete } from "./TaskButtonDelete";
 
 export function TaskCard({ task }: { task: Task }) {
   return (
@@ -32,9 +33,10 @@ export function TaskCard({ task }: { task: Task }) {
         <span>{new Date(task.createdAt).toLocaleDateString()}</span>
       </CardContent>
       <CardFooter>
-        <Button variant="destructive">
+        {/* <Button variant="destructive">
           <TrashIcon />
-        </Button>
+        </Button> */}
+        <TaskButtonDelete taskId={task.id} />
         <Button variant="outline">
           <PencilIcon />
         </Button>

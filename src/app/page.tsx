@@ -1,15 +1,4 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import prisma from "@/lib/prisma";
-import clsx from "clsx";
-import { PencilIcon, TrashIcon } from "lucide-react";
 import { TaskCard } from "@/components/taskCard";
 
 async function HomePage() {
